@@ -1,9 +1,11 @@
 # dependencies
 node_modules/
 
-# env files
+# environment files
 .env
-backend/.env
+.env.*
+!.env.example
+!backend/.env.example
 
 # database
 backend/db/
@@ -16,5 +18,5 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-
-
+# build output
+dist/

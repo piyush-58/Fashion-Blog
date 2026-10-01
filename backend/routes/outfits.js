@@ -780,14 +780,26 @@ router.post("/validate/prompt", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.get("/user/:userId", async (req, res) => {
   try {
-    const outfits = await OutfitModel.find({ userId: req.params.userId })
+    const userId = req.userId;
+
+    if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Only allow the logged-in user to access their own outfits.
+    if (req.params.userId !== userId.toString()) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    const outfits = await OutfitModel.find({ userId })
       .populate("items")
       .sort({ createdAt: -1 });
+
     res.json(outfits);
   } catch (err) {
-    console.error(err);
+    console.error("Failed to fetch outfits:", err);
     res.status(500).json({ error: "Failed to fetch outfits" });
   }
 });

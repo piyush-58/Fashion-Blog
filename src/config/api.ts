@@ -1,7 +1,8 @@
 import axios, { AxiosError } from "axios";
 
 // Use deployed backend URL
-export const API_BASE_URL = process.env.REACT_APP_API_URL || "https://fashion-blog-mern-1.onrender.com";
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "https://fashion-blog-mern-1.onrender.com";
 
 console.log("🌐 API Base URL:", API_BASE_URL);
 
@@ -15,8 +16,7 @@ export const API_ENDPOINTS = {
   // Chat
   SEND_MESSAGE: `${API_BASE_URL}/api/chat/`,
   GET_CHAT_HISTORY: `${API_BASE_URL}/api/chat/history`,
-  DELETE_CHAT_HISTORY: `${API_BASE_URL}/api/chat/`,
-
+ DELETE_CHAT_HISTORY: `${API_BASE_URL}/api/chat/all`,
   // Wardrobe
   ADD_ITEM: `${API_BASE_URL}/api/wardrobe/`,
   GET_ITEMS: `${API_BASE_URL}/api/wardrobe/`,
